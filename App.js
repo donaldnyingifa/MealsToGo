@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { theme } from "./src/infrastructure/theme";
+import { Navigation } from "./src/infrastructure/navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "./src/infrastructure/theme/colors";
@@ -74,38 +75,7 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={
-                  createScreenOptions
-                }
-                tabBarOptions={{
-                  activeTintColor:
-                    colors.brand.primary,
-                  inactiveTintColor:
-                    colors.brand.muted,
-                }}
-              >
-                <Tab.Screen
-                  name="Restaurants"
-                  component={RestaurantsScreen}
-                />
-                <Tab.Screen
-                  name="Settings"
-                  component={Settings}
-                />
-                <Tab.Screen
-                  name="Map"
-                  component={Map}
-                />
-              </Tab.Navigator>
-            </NavigationContainer>
-
-            {/* <RestaurantsScreen /> */}
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
+        <Navigation />
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />
