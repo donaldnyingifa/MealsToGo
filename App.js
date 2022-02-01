@@ -5,6 +5,8 @@ import { theme } from "./src/infrastructure/theme";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "./src/infrastructure/theme/colors";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -72,32 +74,38 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              activeTintColor:
-                colors.brand.primary,
-              inactiveTintColor:
-                colors.brand.muted,
-            }}
-          >
-            <Tab.Screen
-              name="Restaurants"
-              component={RestaurantsScreen}
-            />
-            <Tab.Screen
-              name="Settings"
-              component={Settings}
-            />
-            <Tab.Screen
-              name="Map"
-              component={Map}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <NavigationContainer>
+              <Tab.Navigator
+                screenOptions={
+                  createScreenOptions
+                }
+                tabBarOptions={{
+                  activeTintColor:
+                    colors.brand.primary,
+                  inactiveTintColor:
+                    colors.brand.muted,
+                }}
+              >
+                <Tab.Screen
+                  name="Restaurants"
+                  component={RestaurantsScreen}
+                />
+                <Tab.Screen
+                  name="Settings"
+                  component={Settings}
+                />
+                <Tab.Screen
+                  name="Map"
+                  component={Map}
+                />
+              </Tab.Navigator>
+            </NavigationContainer>
 
-        {/* <RestaurantsScreen /> */}
+            {/* <RestaurantsScreen /> */}
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />

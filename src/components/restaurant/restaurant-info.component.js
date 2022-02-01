@@ -9,15 +9,6 @@ import star from "../../../assets/star";
 import { SvgXml } from "react-native-svg";
 import open from "../../../assets/open";
 
-// const Title = styled.Text`
-//   font-family: ${(props) =>
-//     props.theme.fonts.heading};
-//   font-size: ${(props) =>
-//     props.theme.fontSizes.body};
-//   color: ${(props) =>
-//     props.theme.colors.ui.primary};
-// `;
-
 const Address = styled.Text`
   font-size: ${(props) =>
     props.theme.fontSizes.caption};
@@ -74,6 +65,7 @@ export const RestaurantInfo = ({
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(
@@ -84,14 +76,15 @@ export const RestaurantInfo = ({
     <RestaurantCard elevation={5}>
       <RestaurantCardCover
         key={name}
-        source={photos[0]}
+        source={{ uri: photos[0] }}
       />
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
-            {ratingArray.map((rating) => (
+            {ratingArray.map((_, i) => (
               <SvgXml
+                key={`star-${placeId}-${i}`}
                 xml={star}
                 width={20}
                 height={20}
