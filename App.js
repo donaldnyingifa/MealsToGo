@@ -3,11 +3,8 @@ import { ThemeProvider } from "styled-components/native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { theme } from "./src/infrastructure/theme";
 import { Navigation } from "./src/infrastructure/navigation";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { colors } from "./src/infrastructure/theme/colors";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -16,16 +13,39 @@ import {
   useFonts as useLato,
   Lato_400Regular,
 } from "@expo-google-fonts/lato";
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-} from "react-native";
-import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
-import { RestaurantsScreen } from "./src/screens/restaurants.screen";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+
+const firebaseConfig = {
+  apiKey:
+    "AIzaSyDGOzVHJysaRfmqAgIynPKZUbgGhmfk8vc",
+  authDomain: "mealstogo-a703b.firebaseapp.com",
+  projectId: "mealstogo-a703b",
+  storageBucket: "mealstogo-a703b.appspot.com",
+  messagingSenderId: "226278776241",
+  appId:
+    "1:226278776241:web:0f380e7a10038241ccf190",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+const db = app.firestore();
+const auth = firebase.auth();
+
+export { db, auth };
 
 const Tab = createBottomTabNavigator();
 
@@ -49,17 +69,6 @@ const createScreenOptions = ({ route }) => {
   };
 };
 
-const Map = () => (
-  <SafeArea>
-    <Text>Map</Text>
-  </SafeArea>
-);
-const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-
 export default function App() {
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -75,7 +84,9 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Navigation />
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />

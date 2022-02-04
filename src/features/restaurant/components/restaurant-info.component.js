@@ -1,13 +1,15 @@
 import React from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
-import { Spacer } from "../../components/spacer/spacer.component";
-import { Text } from "../../components/typography/text.component";
-import PhotoA from "../../../assets/must-know.jpeg";
-import PhotoB from "../../../assets/blogo.png";
-import star from "../../../assets/star";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
+import PhotoA from "../../../../assets/must-know.jpeg";
+import PhotoB from "../../../../assets/blogo.png";
+import star from "../../../../assets/star";
 import { SvgXml } from "react-native-svg";
-import open from "../../../assets/open";
+import open from "../../../../assets/open";
+import { Favourite } from "../../../components/favourites/favourite.component";
 
 const Address = styled.Text`
   font-size: ${(props) =>
@@ -74,10 +76,13 @@ export const RestaurantInfo = ({
 
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover
-        key={name}
-        source={{ uri: photos[0] }}
-      />
+      <View>
+        <Favourite restaurant={restaurant} />
+        <RestaurantCardCover
+          key={name}
+          source={{ uri: photos[0] }}
+        />
+      </View>
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
