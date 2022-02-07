@@ -19,7 +19,7 @@ const TAB_ICON = {
   Restaurants: "md-restaurant",
   Map: "md-map",
   Checkout: "md-cart",
-  Settings: "md-settings",
+  Setting: "md-settings",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -44,7 +44,7 @@ export const AppNavigator = () => (
           screenOptions={createScreenOptions}
           tabBarOptions={{
             activeTintColor: colors.brand.primary,
-            inactiveTintColor: colors.brand.muted,
+            // inactiveTintColor: colors.brand.muted,
           }}
         >
           <Tab.Screen
