@@ -26,6 +26,7 @@ export const AuthenticationContextProvider = ({
       setUser(usr);
       setIsLoading(false);
     } else {
+      // console.log("i no dey see user");
       setIsLoading(false);
     }
   });

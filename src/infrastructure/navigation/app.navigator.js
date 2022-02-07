@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Text, SafeAreaView } from "react-native";
 
 import { RestaurantsNavigator } from "./restaurants.navigator";
-// import { SettingsNavigator } from "./settings.navigator";
+import { SettingsNavigator } from "./settings.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
 // import { CheckoutNavigator } from "./checkout.navigator";
 // import { CartContextProvider } from "../../services/cart/cart.context";
@@ -35,12 +35,6 @@ const createScreenOptions = ({ route }) => {
   };
 };
 
-const Settings = () => (
-  <SafeAreaView>
-    <Text>Settings</Text>
-  </SafeAreaView>
-);
-
 export const AppNavigator = () => (
   <FavouritesContextProvider>
     <LocationContextProvider>
@@ -66,8 +60,8 @@ export const AppNavigator = () => (
             component={MapScreen}
           />
           <Tab.Screen
-            name="Settings"
-            component={Settings}
+            name="Setting"
+            component={SettingsNavigator}
           />
         </Tab.Navigator>
         {/* </CartContextProvider> */}

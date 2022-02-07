@@ -15,7 +15,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-
+// import { FadeInView } from "../../../components/animations/fade.animation";
 import { RestaurantInfo } from "../components/restaurant-info.component";
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
@@ -29,7 +29,9 @@ const SearchContainer = styled.View`
 //   padding: ${(props) => props.theme.space[3]};
 // `;
 
-const RestaurantList = styled(FlatList).attrs({
+export const RestaurantList = styled(
+  FlatList
+).attrs({
   contentContainerStyle: {
     padding: 16,
   },
@@ -94,7 +96,9 @@ export const RestaurantsScreen = ({
                 )
               }
             >
+              {/* <FadeInView> */}
               <RestaurantInfo restaurant={item} />
+              {/* </FadeInView> */}
             </TouchableOpacity>
           );
         }}
