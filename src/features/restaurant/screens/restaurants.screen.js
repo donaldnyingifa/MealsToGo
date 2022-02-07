@@ -15,7 +15,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-// import { FadeInView } from "../../../components/animations/fade.animation";
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { RestaurantInfo } from "../components/restaurant-info.component";
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
@@ -96,9 +96,11 @@ export const RestaurantsScreen = ({
                 )
               }
             >
-              {/* <FadeInView> */}
-              <RestaurantInfo restaurant={item} />
-              {/* </FadeInView> */}
+              <FadeInView>
+                <RestaurantInfo
+                  restaurant={item}
+                />
+              </FadeInView>
             </TouchableOpacity>
           );
         }}
