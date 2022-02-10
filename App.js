@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components/native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { theme } from "./src/infrastructure/theme";
 import { Navigation } from "./src/infrastructure/navigation";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import {
   useFonts as useOswald,
@@ -13,7 +13,7 @@ import {
   useFonts as useLato,
   Lato_400Regular,
 } from "@expo-google-fonts/lato";
-import { Ionicons } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -47,27 +47,27 @@ const auth = firebase.auth();
 
 export { db, auth };
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
-const TAB_ICON = {
-  Restaurants: "md-restaurant",
-  Map: "md-map",
-  Checkout: "md-cart",
-  Settings: "md-settings",
-};
+// const TAB_ICON = {
+//   Restaurants: "md-restaurant",
+//   Map: "md-map",
+//   Checkout: "md-cart",
+//   Settings: "md-settings",
+// };
 
-const createScreenOptions = ({ route }) => {
-  const iconName = TAB_ICON[route.name];
-  return {
-    tabBarIcon: ({ size, color }) => (
-      <Ionicons
-        name={iconName}
-        size={size}
-        color={color}
-      />
-    ),
-  };
-};
+// const createScreenOptions = ({ route }) => {
+//   const iconName = TAB_ICON[route.name];
+//   return {
+//     tabBarIcon: ({ size, color }) => (
+//       <Ionicons
+//         name={iconName}
+//         size={size}
+//         color={color}
+//       />
+//     ),
+//   };
+// };
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
