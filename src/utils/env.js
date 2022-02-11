@@ -14,4 +14,3 @@ export const host =
   !isDevelopment || isAndroid
     ? liveHost
     : localHost;
-// export const host = liveHost;

@@ -33,6 +33,8 @@ const RestaurantCard = styled(Card)`
   background-color: white;
   margin-bottom: ${(props) =>
     props.theme.space[3]};
+  width: 95%;
+  align-self: center;
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
@@ -75,7 +77,7 @@ export const RestaurantInfo = ({
   );
 
   return (
-    <RestaurantCard elevation={5}>
+    <RestaurantCard elevation={2}>
       <View>
         <Favourite restaurant={restaurant} />
         <RestaurantCardCover

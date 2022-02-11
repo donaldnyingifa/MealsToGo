@@ -1,22 +1,39 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { AuthenticationContext } from "../authentication/authentication.context";
 
 export const CartContext = createContext();
 
-export const CartContextProvider = ({ children }) => {
-  const { user } = useContext(AuthenticationContext);
+export const CartContextProvider = ({
+  children,
+}) => {
+  const { user } = useContext(
+    AuthenticationContext
+  );
 
   const [cart, setCart] = useState([]);
-  const [restaurant, setRestaurant] = useState(null);
+  const [restaurant, setRestaurant] =
+    useState(null);
 
   const [sum, setSum] = useState(0);
 
   const saveCart = async (rst, crt, uid) => {
     try {
-      const jsonValue = JSON.stringify({ restaurant: rst, cart: crt });
-      await AsyncStorage.setItem(`@cart-${uid}`, jsonValue);
+      const jsonValue = JSON.stringify({
+        restaurant: rst,
+        cart: crt,
+      });
+
+      await AsyncStorage.setItem(
+        `@cart-${uid}`,
+        jsonValue
+      );
     } catch (e) {
       console.log("error storing", e);
     }
@@ -24,9 +41,13 @@ export const CartContextProvider = ({ children }) => {
 
   const loadCart = async (uid) => {
     try {
-      const value = await AsyncStorage.getItem(`@cart-${uid}`);
+      const value = await AsyncStorage.getItem(
+        `@cart-${uid}`
+      );
+
       if (value !== null) {
-        const { restaurant: rst, cart: crt } = JSON.parse(value);
+        const { restaurant: rst, cart: crt } =
+          JSON.parse(value);
         setRestaurant(rst);
         setCart(crt);
       }
@@ -38,12 +59,14 @@ export const CartContextProvider = ({ children }) => {
   useEffect(() => {
     if (user && user.uid) {
       loadCart(user.uid);
+      console.log("i tried to load cart");
     }
   }, [user]);
 
   useEffect(() => {
     if (user && user.uid) {
       saveCart(restaurant, cart, user.uid);
+      console.log("i tried to save cart");
     }
   }, [restaurant, cart, user]);
 
@@ -52,14 +75,20 @@ export const CartContextProvider = ({ children }) => {
       setSum(0);
       return;
     }
-    const newSum = cart.reduce((acc, { price }) => {
-      return (acc += price);
-    }, 0);
+    const newSum = cart.reduce(
+      (acc, { price }) => {
+        return (acc += price);
+      },
+      0
+    );
     setSum(newSum);
   }, [cart]);
 
   const add = (item, rst) => {
-    if (!restaurant || restaurant.placeId !== rst.placeId) {
+    if (
+      !restaurant ||
+      restaurant.placeId !== rst.placeId
+    ) {
       setRestaurant(rst);
       setCart([item]);
     } else {
