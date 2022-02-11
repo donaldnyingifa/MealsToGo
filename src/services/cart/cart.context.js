@@ -45,7 +45,8 @@ export const CartContextProvider = ({
         `@cart-${uid}`
       );
 
-      if (value !== null) {
+      if (JSON.parse(value).cart.length > 0) {
+        console.log("I saved: ", value);
         const { restaurant: rst, cart: crt } =
           JSON.parse(value);
         setRestaurant(rst);
@@ -59,14 +60,12 @@ export const CartContextProvider = ({
   useEffect(() => {
     if (user && user.uid) {
       loadCart(user.uid);
-      console.log("i tried to load cart");
     }
   }, [user]);
 
   useEffect(() => {
     if (user && user.uid) {
       saveCart(restaurant, cart, user.uid);
-      console.log("i tried to save cart");
     }
   }, [restaurant, cart, user]);
 
